@@ -14,11 +14,13 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'pg', '~> 0.21.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3'
   gem 'rspec-rails', '~> 3.7', '>= 3.7.1'
+  gem 'guard-rspec', '4.7.3'
+  gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
 end
 
 group :development do
@@ -30,10 +32,6 @@ end
 
 group :test do
   gem 'capybara', '~> 2.16'
-end
-
-group :production do
-  gem 'pg', '~> 0.21.0'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
