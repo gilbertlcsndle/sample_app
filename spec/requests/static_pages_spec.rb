@@ -11,9 +11,9 @@ describe "Static pages" do
       expect(response.body).to include('Sample App')
     end
 
-    it "should have the title 'Home'" do
+		it "should have the base title" do
       get '/static_pages/home'
-      assert_select 'title', "#{base_title} | Home"
+      assert_select 'title', "Ruby on Rails Tutorial Sample App"
     end
   end
 
