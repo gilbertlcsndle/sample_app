@@ -4,55 +4,42 @@ describe "Static pages" do
 
   let(:base_title) { "Ruby on Rails Tutorial Sample App" }
 
+  subject { response.body }
+
+  shared_examples_for 'all static pages' do
+    it { assert_select 'h1', heading }
+    it { assert_select 'title', full_title(page_title) }
+  end
+
   describe "Home page" do
+    before { get root_path }
+    let(:heading) { /Sample App/ }
+    let(:page_title) { '' }
 
-    it "should have the content 'Sample App'" do
-      get '/static_pages/home'
-      expect(response.body).to include('Sample App')
-    end
-
-		it "should have the base title" do
-      get '/static_pages/home'
-      assert_select 'title', "Ruby on Rails Tutorial Sample App"
-    end
+    it_should_behave_like 'all static pages'
   end
 
   describe "Help page" do
+    before { get help_path }
+    let(:heading) { 'Help' }
+    let(:page_title) { 'Help' }
 
-    it "should have the content 'Help'" do
-      get '/static_pages/help'
-      expect(response.body).to include('Help')
-    end
-
-    it "should have the title 'Help'" do
-      get '/static_pages/help'
-      assert_select 'title', "#{base_title} | Help"
-    end
+    it_should_behave_like 'all static pages'
   end
 
   describe "About page" do
+    before { get about_path }
+    let(:heading) { 'About Us' }
+    let(:page_title) { 'About Us' }
 
-    it "should have the content 'About Us'" do
-      get '/static_pages/about'
-      expect(response.body).to include('About Us')
-    end
-
-    it "should have the title 'About Us'" do
-      get '/static_pages/about'
-      assert_select 'title', "#{base_title} | About Us"
-    end
+    it_should_behave_like 'all static pages'
   end
 
   describe 'Contact page' do
+    before { get contact_path }
+    let(:heading) { 'Contact' }
+    let(:page_title) { 'Contact' }
 
-    it "should have the content 'Contact'" do
-      get '/static_pages/contact'
-      expect(response.body).to include('Contact')
-    end
-
-    it "should have the title 'Contact'" do
-      get '/static_pages/contact'
-      assert_select 'title', "#{base_title} | Contact"
-    end
+    it_should_behave_like 'all static pages'
   end
 end
