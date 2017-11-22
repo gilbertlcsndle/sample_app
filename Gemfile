@@ -34,6 +34,7 @@ end
 
 group :test do
   gem 'capybara', '~> 2.16'
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
