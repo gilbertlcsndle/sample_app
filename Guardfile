@@ -52,6 +52,7 @@ guard :rspec, cmd: "spring rspec -f doc", failed_mode: :keep, all_on_start: true
       rspec.spec.call("acceptance/#{m[1]}")
     ]
   end
+  watch('app/models/micropost.rb') { "#{rspec.spec_dir}/models/user_spec.rb" }
 
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }

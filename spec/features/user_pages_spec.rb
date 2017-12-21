@@ -34,12 +34,13 @@ describe 'User pages' do
 
       describe "as an admin user" do
         let(:admin) { FactoryBot.create(:admin) }
+        let(:user) { FactoryBot.create(:user) }
         before do
           sign_in admin
           visit users_path
         end
 
-        it { should have_link('delete', href: user_path(User.first)) }
+        it { should have_link('delete', href: user_path(user)) }
         it "should be able to delete another user" do
           expect do
             click_link('delete', match: :first)
@@ -147,6 +148,23 @@ describe 'User pages' do
       it { should have_link('Sign out', href: signout_path) }
       specify { expect(user.reload.name).to  eq new_name }
       specify { expect(user.reload.email).to eq new_email }
+    end
+  end
+
+  describe "profile page" do
+    let(:user) { FactoryBot.create(:user) }
+    let!(:m1) { FactoryBot.create(:micropost, user: user, content: "Foo") }
+    let!(:m2) { FactoryBot.create(:micropost, user: user, content: "Bar") }
+
+    before { visit user_path(user) }
+
+    it { should have_content(user.name) }
+    it { should have_title(user.name) }
+
+    describe "microposts" do
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
+      it { should have_content(user.microposts.count) }
     end
   end
 end
