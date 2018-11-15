@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
   function character_count(length) {
     var text = length > 1 ? 'characters' : 'character';
 
